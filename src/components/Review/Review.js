@@ -4,6 +4,7 @@ import ReviewItem from '../ReviewItem/ReviewItem';
 import Cart from '../Cart/Cart';
 import happyImage from '../../images/giphy.gif';
 import { useHistory } from 'react-router-dom';
+import '../../style.css'
 
 const Review = () => {
     const [cart, setCart] = useState([]);
@@ -42,8 +43,8 @@ const Review = () => {
         thankyou = <img src={happyImage} alt="" />
     }
     return (
-        <div className="twin-container">
-            <div className="product-container">
+        <div className="container-fluid mt-5 row justify-content-between">
+            <div className="col-md-8 p-3">
                 {
                     cart.map(pd => <ReviewItem
                         key={pd.key}
@@ -52,9 +53,9 @@ const Review = () => {
                 }
                 {thankyou}
             </div>
-            <div className="cart-container">
+            <div className="col-md-3 p-5 border">
                 <Cart cart={cart}>
-                    <button onClick={handleProceedCheckout} className="main-button">Proceed Checkout</button>
+                    <button onClick={handleProceedCheckout} className="btn btn-outline-dark">Proceed Checkout</button>
                 </Cart>
             </div>
         </div>

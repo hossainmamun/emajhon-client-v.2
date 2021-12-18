@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import './Shop.css';
 import Product from '../Product/Product';
 import Cart from '../Cart/Cart';
 import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
 import { Link } from 'react-router-dom';
+import '../../style.css'
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -54,24 +54,28 @@ const Shop = () => {
     }
 
     return (
-        <div className="twin-container">
-            <div className="product-container">
-                {
-                    products.map(pd => <Product
-                        key={pd.key}
-                        showAddToCart={true}
-                        handleAddProduct={handleAddProduct}
-                        product={pd}
-                    ></Product>)
-                }
+        <div className="container-fluid mt-5">
+            <div className="row justify-content-between">
+                <div className="col-md-8 border p-3 ms-4">
+                    {
+                        products.map(pd => <Product
+                            key={pd.key}
+                            showAddToCart={true}
+                            handleAddProduct={handleAddProduct}
+                            product={pd}
+                        ></Product>)
+                    }
+                </div>
+                <div className="col-md-3 border p-5 me-4">
+                    <Cart cart={cart}>
+                        <Link to="/review">
+                            <button className="btn btn-outline-secondary">Review Order</button>
+                        </Link>
+                    </Cart>
+                </div>
             </div>
-            <div className="cart-container">
-                <Cart cart={cart}>
-                    <Link to="/review">
-                        <button className="btn btn-outline-secondary">Review Order</button>
-                    </Link>
-                </Cart>
-            </div>
+            
+            
 
         </div>
     );

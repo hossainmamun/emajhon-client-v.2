@@ -1,20 +1,10 @@
 import React from 'react';
-import fakeData from '../../fakeData/'
+import '../../style.css'
 
 const Inventory = () => {
-    const handleAddProduct = () => {
-        fetch('https://pacific-inlet-47816.herokuapp.com/addProduct', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(fakeData[0])
-        })
-    }
     return (
-        <div className='container text-center'>
+        <div className='container text-center mt-5 pt-5'>
             <h1>Inventory coming soon...</h1>
-            <button className='btn btn-outline-info' onClick={handleAddProduct}>Product Loader</button>
         </div>
     );
 };

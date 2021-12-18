@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../App';
 import { useHistory, useLocation } from 'react-router-dom';
 import { initializeLoginFramework, handleGoogleSignIn, handleSignOut, handleFbSignIn, createUserWithEmailAndPassword, signInWithEmailAndPassword } from './loginManager';
+import '../../style.css'
 
 
 
@@ -90,11 +91,12 @@ function Login() {
 
   return (
     <div className='container' style={{ textAlign: 'center' }}>
+      <h1>Authentication first</h1>
       {user.isSignedIn ? <button onClick={signOut}>Sign Out</button> :
-        <button className='btn btn-outline-success my-3' onClick={googleSignIn}>Sign In</button>
+        <button className='btn btn-outline-success my-3' onClick={googleSignIn}>Continue With Google</button>
       }
       <br />
-      <button className='btn btn-outline-primary' onClick={fbSignIn}>Sign in using Facebook</button>
+      <button className='btn btn-outline-primary' onClick={fbSignIn}>Continue With Facebook</button>
       {
         user.isSignedIn && <div>
           <p>Welcome, {user.name}!</p>
@@ -103,28 +105,30 @@ function Login() {
         </div>
       }
 
-      <h1>Authentication first</h1>
-      <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
-      <label htmlFor="newUser">New User Sign up</label>
-      <form onSubmit={handleSubmit}>
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <div className="form-group">
-              {newUser && <input name="name" type="text" className='form-control' onBlur={handleBlur} placeholder="Your name" />}
-            </div>
+      
+      <div className='mt-5'>
+        <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
+        <label htmlFor="newUser">New User Sign up</label>
+        <form onSubmit={handleSubmit}>
+          <div className="row justify-content-center">
+            <div className="col-md-6">
+              <div className="form-group">
+                {newUser && <input name="name" type="text" className='form-control' onBlur={handleBlur} placeholder="Your name" />}
+              </div>
 
-            <div className="form-group my-3">
-              <input type="text" name="email" className='form-control' onBlur={handleBlur} placeholder="Your Email address" required />
-            </div>
+              <div className="form-group my-3">
+                <input type="text" name="email" className='form-control' onBlur={handleBlur} placeholder="Your Email address" required />
+              </div>
 
-            <div className="form-group">
-              <input type="password" name="password" className='form-control' onBlur={handleBlur} placeholder="Your Password" required />
-            </div>
+              <div className="form-group">
+                <input type="password" name="password" className='form-control' onBlur={handleBlur} placeholder="Your Password" required />
+              </div>
 
-            <input type="submit" className='btn btn-outline-dark my-3' value={newUser ? 'Sign up' : 'Sign in'} />
+              <input type="submit" className='btn btn-outline-dark my-3' value={newUser ? 'Sign up' : 'Sign in'} />
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
       <p style={{ color: 'red' }}>{user.error}</p>
       {user.success && <p style={{ color: 'green' }}>User {newUser ? 'created' : 'Logged In'} successfully</p>}
     </div>
